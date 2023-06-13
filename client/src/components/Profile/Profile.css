@@ -1,0 +1,91 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    color: #fff;
+    background-image: linear-gradient(black, rgba(0, 0, 0, 0.795));
+  }
+  
+  .section {
+    width: 100%;
+    border: 1px solid #333;
+    padding: 20px;
+    margin: 10px 0;
+    border-radius: 10px;
+    background: #242629;
+  }
+  
+  .full-width-section {
+    width: 100%;
+  }
+  
+  .half-width-sections {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin-bottom: 50px;
+  }
+  
+  .featured-streams {
+    display: flex;
+    flex-wrap: wrap; /* Added flex-wrap property */
+    justify-content: space-between;
+  }
+  
+  /* Renamed .stream-card to .stream-card-trending */
+  .stream-card-trending {
+    width: calc((100% / 2) - 10px - 20px);
+    border: 1px solid #333;
+    margin: 10px;
+    padding: 20px;
+    border-radius: 10px;
+    background: #2e3236;
+    overflow: hidden;
+  }
+  
+  .stream-card-trending video {
+    width: 100%;
+    height: auto;
+  }
+  
+  .half-width-sections .section {
+    flex: 1 0 300px; 
+    margin: 10px;
+  }
+  
+  .dialog-content a {
+    color: inherit;
+    text-decoration: none;
+  }
+  
+  .stream-card-trending iframe {
+    width: 100%;
+    height: 400px; 
+  }
+  
+  .share-button a {
+    color: black;
+  }
+  
+  .upload-button {
+    color: blue; 
+  }
+
+  .search-bar {
+    width: 100%;
+  }
+
+  @media screen and (max-width: 768px) {
+    .stream-card-trending {
+      width: 100%; 
+    }
+  }
+
+  
+  @media screen and (max-width: 768px) {
+    div.search-bar {
+      width: 100%; 
+    }
+  }
