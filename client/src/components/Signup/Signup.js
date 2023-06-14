@@ -1,17 +1,17 @@
-import React, { useState } from 'react';
-import { useMutation } from '@apollo/client';
-import { Link } from 'react-router-dom';
-import { NEW_USER_MUTATION } from '../graphql/mutations';
-import './Signup.css';
-import Auth from '../../utils/auth';
+import React, { useState } from "react";
+import { useMutation } from "@apollo/client";
+import { Link } from "react-router-dom";
+import { NEW_USER_MUTATION } from "../graphql/mutations";
+import "./Signup.css";
+import Auth from "../../utils/auth";
 
 const SignUp = () => {
   const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    username: '',
-    password: '',
-    email: '',
+    firstName: "",
+    lastName: "",
+    username: "",
+    password: "",
+    email: "",
   });
 
   const [signUp, { error, data }] = useMutation(NEW_USER_MUTATION);
@@ -42,14 +42,16 @@ const SignUp = () => {
       <div className="card-body">
         {data ? (
           <p>
-            Success! You may now head{' '}
-            <Link to="/">back to the homepage.</Link>
+            Success! You may now head <Link to="/">back to the homepage.</Link>
           </p>
         ) : (
           <div className="signUp-container">
             <h1 className="center">Ready to start free trial?</h1>
 
-            <p className="center">Fill out the information below and create your StreamVerse account!</p>
+            <p className="center">
+              Fill out the information below and create your StreamVerse
+              account!
+            </p>
             <form onSubmit={handleSubmit}>
               <label>
                 First Name:

@@ -9,15 +9,14 @@ import Signup from "./components/Signup/Signup";
 
 import Profile from "./components/Profile/Profile";
 
-import { ThemeProvider, createTheme } from '@mui/material/styles';
-import CssBaseline from '@mui/material/CssBaseline';
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+import CssBaseline from "@mui/material/CssBaseline";
 
 const darkTheme = createTheme({
   palette: {
-    mode: 'dark',
+    mode: "dark",
   },
 });
-
 
 function App() {
   const [uploadedVideos, setUploadedVideos] = useState([]);
@@ -33,8 +32,6 @@ function App() {
             />
           </Route>
 
-          
-
           <Route path="/profile">
             <Profile />
           </Route>
@@ -46,19 +43,14 @@ function App() {
           <Route path="/login">
             <Login />
           </Route>
-         
         </Switch>
       </Router>
 
       <ThemeProvider theme={darkTheme}>
-      <CssBaseline />
-   
-    </ThemeProvider>
+        <CssBaseline />
+      </ThemeProvider>
     </ApolloProvider>
   );
-
-  
-  
 }
 
 export default App;

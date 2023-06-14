@@ -1,4 +1,3 @@
-
 import React from "react";
 import "./Header.css";
 import { Link, useLocation } from "react-router-dom";
@@ -71,5 +70,3 @@ function Header(props) {
 }
 
 export default Header;
-
-

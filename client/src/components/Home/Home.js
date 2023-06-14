@@ -3,7 +3,14 @@ import { Link } from "react-router-dom";
 import AuthService from "../../utils/auth";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Tooltip } from "@mui/material";
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  Tooltip,
+} from "@mui/material";
 
 import "./Home.css";
 
@@ -13,25 +20,37 @@ const ShareDialog = ({ open, handleClose, video }) => {
   return (
     <Dialog open={open} onClose={handleClose}>
       <DialogTitle>Share this video</DialogTitle>
-      
+
       <DialogContent>
         <div className="share-button">
           <Button variant="contained">
-            <a href={`https://www.facebook.com/sharer/sharer.php?u=${video.videoUrl}`} target="_blank" rel="noopener noreferrer">
+            <a
+              href={`https://www.facebook.com/sharer/sharer.php?u=${video.videoUrl}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               Share on Facebook
             </a>
           </Button>
         </div>
         <div className="share-button">
           <Button variant="contained">
-            <a href={`https://twitter.com/intent/tweet?text=${video.title}&url=${video.videoUrl}`} target="_blank" rel="noopener noreferrer">
+            <a
+              href={`https://twitter.com/intent/tweet?text=${video.title}&url=${video.videoUrl}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               Share on Twitter
             </a>
           </Button>
         </div>
         <div className="share-button">
           <Button variant="contained">
-            <a href={`mailto:?subject=${video.title}&body=Check out this video: ${video.videoUrl}`} target="_blank" rel="noopener noreferrer">
+            <a
+              href={`mailto:?subject=${video.title}&body=Check out this video: ${video.videoUrl}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               Share via Email
             </a>
           </Button>
@@ -42,7 +61,7 @@ const ShareDialog = ({ open, handleClose, video }) => {
       </DialogActions>
     </Dialog>
   );
-}
+};
 
 const HomePage = () => {
   const [uploadedVideos, setUploadedVideos] = useState([]);
@@ -83,7 +102,7 @@ const HomePage = () => {
 
   const checkAuthStatus = () => {
     setLoggedIn(AuthService.loggedIn());
-  }
+  };
 
   const openShareDialog = (video) => {
     if (!loggedIn) {
@@ -91,99 +110,101 @@ const HomePage = () => {
     }
     setSelectedVideo(video);
     setShareDialogOpen(true);
-  }
+  };
 
   const closeShareDialog = () => {
     setSelectedVideo(null);
     setShareDialogOpen(false);
-  }
+  };
 
-return (
-  <>
-    <Header>
-      <Link to="/streamverse">Go to StreamVerse</Link>
-    </Header>
-    <div className="container">
-      <main className="main-content">
-        <section className="section full-width-section">
-          <h2>About StreamVerse</h2>
-          <p>
-            Welcome to StreamVerse, the ultimate destination for video sharing and streaming! Our platform is designed with your needs in mind, offering a seamless experience for registration, uploading, viewing, interaction, and sharing of videos. Inspired by the best features of popular video sharing platforms, StreamVerse boasts a polished and user-friendly interface that makes navigating the site a breeze. We prioritize your security and privacy, ensuring that your personal information is protected. Whether you're a content creator looking to share your talents with the world or a viewer seeking high-quality videos, StreamVerse is here to make your experience enjoyable and hassle-free. Join us today and become a part of our vibrant community of creators and viewers, where your passion for videos comes to life.
-          </p>
-          <section className="section">
-            <h2>Upload</h2>
-            <div>
-              <Tooltip title={loggedIn ? "" : "Please log in to upload videos"}>
-                <span>
-                  <a 
-                    href={loggedIn ? "https://www.youtube.com/upload" : ""} 
-                    target={loggedIn ? "_blank" : "_self"} 
-                    rel="noopener noreferrer"
-                  >
-                  <Button variant="contained" disabled={!loggedIn} className="upload-button">
-  Upload to YouTube
-</Button>
-
-
-                  </a>
-                </span>
-              </Tooltip>
-            </div>
+  return (
+    <>
+      <Header>
+        <Link to="/streamverse">Go to StreamVerse</Link>
+      </Header>
+      <div className="container">
+        <main className="main-content">
+          <section className="section full-width-section">
+            <h2>About StreamVerse</h2>
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
-              nec libero nec lacus suscipit tincidunt. Phasellus gravida
-              ultricies risus, eu condimentum massa pretium non.
+              Welcome to StreamVerse, the ultimate destination for video sharing
+              and streaming! Our platform is designed with your needs in mind,
+              offering a seamless experience for registration, uploading,
+              viewing, interaction, and sharing of videos. Inspired by the best
+              features of popular video sharing platforms, StreamVerse boasts a
+              polished and user-friendly interface that makes navigating the
+              site a breeze. We prioritize your security and privacy, ensuring
+              that your personal information is protected. Whether you're a
+              content creator looking to share your talents with the world or a
+              viewer seeking high-quality videos, StreamVerse is here to make
+              your experience enjoyable and hassle-free. Join us today and
+              become a part of our vibrant community of creators and viewers,
+              where your passion for videos comes to life.
             </p>
+            <section className="section">
+              <h2>Upload</h2>
+              <div>
+                <Tooltip
+                  title={loggedIn ? "" : "Please log in to upload videos"}
+                >
+                  <span>
+                    <a
+                      href={loggedIn ? "https://www.youtube.com/upload" : ""}
+                      target={loggedIn ? "_blank" : "_self"}
+                      rel="noopener noreferrer"
+                    >
+                      <Button
+                        variant="contained"
+                        disabled={!loggedIn}
+                        className="upload-button"
+                      >
+                        Upload to YouTube
+                      </Button>
+                    </a>
+                  </span>
+                </Tooltip>
+              </div>
+            </section>
           </section>
-          
-        </section> 
-        <section className="section">
-          <h2>Trending</h2>
-          {loading ? (
-            <p>Loading...</p>
-          ) : (
-            <div className="featured-streams">
-              {uploadedVideos.map((video) => (
-                <div className="stream-card-trending" key={video.id}>
-                  <h3>{video.title}</h3>
-                  <p>{video.description}</p>
-                  <img src={video.thumbnail} alt={video.title} />
-                  <iframe
-                    title={video.title}
-                    src={video.videoUrl}
-                    frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                  />
-                  <Button variant="contained" onClick={() => openShareDialog(video)}>
-                    Share
-                  </Button>
-                </div>
-              ))}
-            </div>
-          )}
-        </section>
-      </main>
-    </div>
-    <ShareDialog open={shareDialogOpen} handleClose={closeShareDialog} video={selectedVideo} />
-    <Footer />
-  </>
-);
+          <section className="section">
+            <h2>Trending</h2>
+            {loading ? (
+              <p>Loading...</p>
+            ) : (
+              <div className="featured-streams">
+                {uploadedVideos.map((video) => (
+                  <div className="stream-card-trending" key={video.id}>
+                    <h3>{video.title}</h3>
+                    <p>{video.description}</p>
+                    <img src={video.thumbnail} alt={video.title} />
+                    <iframe
+                      title={video.title}
+                      src={video.videoUrl}
+                      frameBorder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                    />
+                    <Button
+                      variant="contained"
+                      onClick={() => openShareDialog(video)}
+                    >
+                      Share
+                    </Button>
+                  </div>
+                ))}
+              </div>
+            )}
+          </section>
+        </main>
+      </div>
+      <ShareDialog
+        open={shareDialogOpen}
+        handleClose={closeShareDialog}
+        video={selectedVideo}
+      />
+      <Footer />
+    </>
+  );
 };
 
 export default HomePage;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

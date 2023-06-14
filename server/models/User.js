@@ -5,7 +5,7 @@ const userSchema = new Schema({
   firstName: {
     type: String,
     required: "You must enter a name.",
-    trim: true, 
+    trim: true,
   },
   lastName: {
     type: String,
@@ -39,8 +39,8 @@ const userSchema = new Schema({
     {
       type: Schema.Types.ObjectId,
       ref: "Comment",
-    }
-  ]
+    },
+  ],
 });
 
 userSchema.pre("save", async function (next) {
@@ -59,3 +59,5 @@ userSchema.methods.isCorrectPassword = async function (password) {
 const User = model("User", userSchema);
 
 module.exports = User;
+
+

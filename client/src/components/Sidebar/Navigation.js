@@ -12,10 +12,6 @@ function Navigation() {
         <li>
           <Link to="/profile">Explore</Link>
         </li>
-       
-        
-        
-    
       </ul>
     </nav>
   );

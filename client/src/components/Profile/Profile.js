@@ -1,12 +1,15 @@
-
-
-
 import React, { useEffect, useState } from "react";
 import AuthService from "../../utils/auth";
 import Sidebar from "../Sidebar/Sidebar";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle } from "@mui/material";
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+} from "@mui/material";
 import "./Profile.css";
 
 const ShareDialog = ({ open, handleClose, video }) => {
@@ -18,21 +21,33 @@ const ShareDialog = ({ open, handleClose, video }) => {
       <DialogContent>
         <div className="share-button">
           <Button variant="contained">
-            <a href={`https://www.facebook.com/sharer/sharer.php?u=${video.videoUrl}`} target="_blank" rel="noopener noreferrer">
+            <a
+              href={`https://www.facebook.com/sharer/sharer.php?u=${video.videoUrl}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               Share on Facebook
             </a>
           </Button>
         </div>
         <div className="share-button">
           <Button variant="contained">
-            <a href={`https://twitter.com/intent/tweet?text=${video.title}&url=${video.videoUrl}`} target="_blank" rel="noopener noreferrer">
+            <a
+              href={`https://twitter.com/intent/tweet?text=${video.title}&url=${video.videoUrl}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               Share on Twitter
             </a>
           </Button>
         </div>
         <div className="share-button">
           <Button variant="contained">
-            <a href={`mailto:?subject=${video.title}&body=Check out this video: ${video.videoUrl}`} target="_blank" rel="noopener noreferrer">
+            <a
+              href={`mailto:?subject=${video.title}&body=Check out this video: ${video.videoUrl}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               Share via Email
             </a>
           </Button>
@@ -55,9 +70,9 @@ const Profile = () => {
 
   useEffect(() => {
     if (!AuthService.loggedIn()) {
-      window.location.assign('/');
+      window.location.assign("/");
     } else {
-      fetchVideos('trending');
+      fetchVideos("trending");
     }
     checkAuthStatus();
   }, []);
@@ -127,18 +142,21 @@ const Profile = () => {
           </form>
         </div>
       </Header>
-      <div className="search-bar" style={{ backgroundColor: 'red', padding: '10px', borderRadius: '5px' }}>
-    <form onSubmit={handleSearch}>
-      <input
-        type="text"
-        placeholder="Search videos..."
-        value={searchQuery}
-        onChange={handleSearchQueryChange}
-        style={{ marginRight: '10px' }}
-      />
-      <button type="submit">Search</button>
-    </form>
-  </div>
+      <div
+        className="search-bar"
+        style={{ backgroundColor: "red", padding: "10px", borderRadius: "5px" }}
+      >
+        <form onSubmit={handleSearch}>
+          <input
+            type="text"
+            placeholder="Search videos..."
+            value={searchQuery}
+            onChange={handleSearchQueryChange}
+            style={{ marginRight: "10px" }}
+          />
+          <button type="submit">Search</button>
+        </form>
+      </div>
       <div className="container">
         <Sidebar />
         <main className="main-content">
@@ -159,7 +177,10 @@ const Profile = () => {
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                       allowFullScreen
                     />
-                    <Button variant="contained" onClick={() => openShareDialog(video)}>
+                    <Button
+                      variant="contained"
+                      onClick={() => openShareDialog(video)}
+                    >
                       Share
                     </Button>
                   </div>
@@ -170,13 +191,14 @@ const Profile = () => {
         </main>
       </div>
 
-      <ShareDialog open={shareDialogOpen} handleClose={closeShareDialog} video={selectedVideo} />
+      <ShareDialog
+        open={shareDialogOpen}
+        handleClose={closeShareDialog}
+        video={selectedVideo}
+      />
       <Footer />
     </>
   );
 };
 
 export default Profile;
-
-
-

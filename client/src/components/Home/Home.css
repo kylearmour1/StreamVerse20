@@ -31,11 +31,10 @@
 
 .featured-streams {
   display: flex;
-  flex-wrap: wrap; /* Added flex-wrap property */
+  flex-wrap: wrap; 
   justify-content: space-between;
 }
 
-/* Renamed .stream-card to .stream-card-trending */
 .stream-card-trending {
   width: calc((100% / 2) - 10px - 20px);
   border: 1px solid #333;
@@ -76,6 +75,6 @@
 
 @media screen and (max-width: 768px) {
   .stream-card-trending {
-    width: 100%; /* Set the width to 100% for smaller screens */
+    width: 100%; 
   }
 }

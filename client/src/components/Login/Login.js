@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
-import { useMutation } from '@apollo/client';
-import { LOGIN_MUTATION } from '../graphql/mutations';
-import { useHistory, Link } from 'react-router-dom';
-import './Login.css';
-import Auth from '../../utils/auth';
+import React, { useState } from "react";
+import { useMutation } from "@apollo/client";
+import { LOGIN_MUTATION } from "../graphql/mutations";
+import { useHistory, Link } from "react-router-dom";
+import "./Login.css";
+import Auth from "../../utils/auth";
 
 const Login = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const history = useHistory();
 
   const [login] = useMutation(LOGIN_MUTATION);
@@ -19,7 +19,7 @@ const Login = () => {
         variables: { username, password },
       });
       Auth.login(data.login.token);
-      history.push('/');
+      history.push("/");
     } catch (e) {
       console.error(e);
     }
@@ -53,13 +53,13 @@ const Login = () => {
         </button>
       </form>
       <p>
-        Do not have an account?{' '}
-        <Link to="/signup" className="signup-link">Signup here!</Link>
+        Do not have an account?{" "}
+        <Link to="/signup" className="signup-link">
+          Signup here!
+        </Link>
       </p>
     </div>
   );
 };
 
 export default Login;
-
-
