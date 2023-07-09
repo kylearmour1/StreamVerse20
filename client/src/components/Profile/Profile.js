@@ -79,7 +79,7 @@ const Profile = () => {
 
   const fetchVideos = (query) => {
     const apiKey = process.env.REACT_APP_API_KEY;
-    const maxResults = 6;
+    const maxResults = 100;
 
     fetch(
       `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=${maxResults}&q=${query}&key=${apiKey}`
@@ -202,3 +202,4 @@ const Profile = () => {
 };
 
 export default Profile;
+
