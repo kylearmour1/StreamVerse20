@@ -79,7 +79,7 @@ const HomePage = () => {
 
   const fetchVideos = () => {
     const apiKey = process.env.REACT_APP_API_KEY;
-    const maxResults = 2;
+    const maxResults = 1;
 
     fetch(
       `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=${maxResults}&q=${searchQuery}&key=${apiKey}`
@@ -106,8 +106,8 @@ const HomePage = () => {
     fetchVideos();
   };
 
-  const handleSearchQueryChange = (event) => {
-    setSearchQuery(event.target.value);
+  const handleSearchQueryChange = (value) => {
+    setSearchQuery(value);
   };
 
   const checkAuthStatus = () => {
@@ -156,11 +156,17 @@ const HomePage = () => {
       </Header>
       
       <div>
-  <MuiSearch 
+  {/* <MuiSearch 
     searchQuery={searchQuery} 
     onSearchQueryChange={handleSearchQueryChange} 
     onSearchSubmit={handleSearch} 
-  />
+  /> */}
+  <MuiSearch 
+  searchQuery={searchQuery} 
+  onSearchQueryChange={handleSearchQueryChange} 
+  onSearchSubmit={handleSearch} 
+/>
+
 </div>
 
 
@@ -255,6 +261,10 @@ const HomePage = () => {
 };
 
 export default HomePage;
+
+
+
+
 
 
 
