@@ -1,14 +1,19 @@
-.container {
+
+
+/* 
+ body {
+  background: linear-gradient(black, rgba(0, 0, 0, 0.795)) !important;
+}
+
+.primary-wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 20px;
   color: #fff;
-  background-image: linear-gradient(black, rgba(0, 0, 0, 0.795));
 }
 
-
-.section {
+.primary-section {
   width: 100%;
   border: 1px solid #333;
   padding: 20px;
@@ -17,11 +22,11 @@
   background: #242629;
 }
 
-.full-width-section {
+.full-width-primary-section {
   width: 100%;
 }
 
-.half-width-sections {
+.split-primary-sections {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
@@ -29,13 +34,13 @@
   margin-bottom: 50px;
 }
 
-.featured-streams {
+.highlighted-streams {
   display: flex;
-  flex-wrap: wrap; 
+  flex-wrap: wrap;
   justify-content: space-between;
 }
 
-.stream-card-trending {
+.stream-card-popular {
   width: calc((100% / 2) - 10px - 20px);
   border: 1px solid #333;
   margin: 10px;
@@ -45,36 +50,46 @@
   overflow: hidden;
 }
 
-.stream-card-trending video {
+.stream-card-popular video {
   width: 100%;
   height: auto;
 }
 
-.half-width-sections .section {
-  flex: 1 0 300px; 
+.split-primary-sections .primary-section {
+  flex: 1 0 300px;
   margin: 10px;
 }
 
-.dialog-content a {
+.dialog-body a {
   color: inherit;
   text-decoration: none;
 }
 
-.stream-card-trending iframe {
+.stream-card-popular iframe {
   width: 100%;
-  height: 400px; 
+  height: 400px;
 }
 
-.share-button a {
+.share-icon a {
   color: black;
 }
 
-.upload-button {
-  color: blue; 
+.upload-icon {
+  color: blue;
+}
+
+.query-bar {
+  width: 100%;
 }
 
 @media screen and (max-width: 768px) {
-  .stream-card-trending {
-    width: 100%; 
+  .stream-card-popular {
+    width: 100%;
   }
 }
+
+@media screen and (max-width: 768px) {
+  div.query-bar {
+    width: 100%;
+  }
+} */

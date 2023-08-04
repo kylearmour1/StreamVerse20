@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import AuthService from "../../utils/auth";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
+import MuiSearch from '../MuiSearch/MuiSearch';
+
 import {
   Button,
   Dialog,
@@ -11,8 +13,7 @@ import {
   DialogTitle,
   Tooltip,
 } from "@mui/material";
-
-import "./Home.css";
+import  "./Home.css";
 
 const ShareDialog = ({ open, handleClose, video }) => {
   if (!video) return null;
@@ -69,6 +70,7 @@ const HomePage = () => {
   const [shareDialogOpen, setShareDialogOpen] = useState(false);
   const [selectedVideo, setSelectedVideo] = useState(null);
   const [loggedIn, setLoggedIn] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     fetchVideos();
@@ -77,8 +79,7 @@ const HomePage = () => {
 
   const fetchVideos = () => {
     const apiKey = process.env.REACT_APP_API_KEY;
-    const maxResults = 6;
-    const searchQuery = "";
+    const maxResults = 2;
 
     fetch(
       `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=${maxResults}&q=${searchQuery}&key=${apiKey}`
@@ -100,6 +101,15 @@ const HomePage = () => {
       });
   };
 
+  const handleSearch = (event) => {
+    event.preventDefault();
+    fetchVideos();
+  };
+
+  const handleSearchQueryChange = (event) => {
+    setSearchQuery(event.target.value);
+  };
+
   const checkAuthStatus = () => {
     setLoggedIn(AuthService.loggedIn());
   };
@@ -119,12 +129,48 @@ const HomePage = () => {
 
   return (
     <>
-      <Header>
+    {/* <Header>
+      <Link to="/streamverse">Go to StreamVerse</Link>
+      <div className="search-bar">
+        <MuiSearch 
+          searchQuery={searchQuery} 
+          onSearchQueryChange={handleSearchQueryChange} 
+          onSearchSubmit={handleSearch}
+        />
+      </div>
+    </Header> */}
+
+<Header>
         <Link to="/streamverse">Go to StreamVerse</Link>
+        <div className="search-bar">
+          <form onSubmit={handleSearch}>
+            <input
+              type="text"
+              placeholder="Search videos..."
+              value={searchQuery}
+              onChange={handleSearchQueryChange}
+            />
+            <button type="submit">Search</button>
+          </form>
+        </div>
       </Header>
+      
+      <div>
+  <MuiSearch 
+    searchQuery={searchQuery} 
+    onSearchQueryChange={handleSearchQueryChange} 
+    onSearchSubmit={handleSearch} 
+  />
+</div>
+
+
+      
+
+     
+
       <div className="container">
         <main className="main-content">
-          <section className="section full-width-section">
+          <section className="section">
             <h2>About StreamVerse</h2>
             <p>
               Welcome to StreamVerse, the ultimate destination for video sharing
@@ -166,35 +212,36 @@ const HomePage = () => {
               </div>
             </section>
           </section>
+
           <section className="section">
-            <h2>Trending</h2>
-            {loading ? (
-              <p>Loading...</p>
-            ) : (
-              <div className="featured-streams">
-                {uploadedVideos.map((video) => (
-                  <div className="stream-card-trending" key={video.id}>
-                    <h3>{video.title}</h3>
-                    <p>{video.description}</p>
-                    <img src={video.thumbnail} alt={video.title} />
-                    <iframe
-                      title={video.title}
-                      src={video.videoUrl}
-                      frameBorder="0"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                    />
-                    <Button
-                      variant="contained"
-                      onClick={() => openShareDialog(video)}
-                    >
-                      Share
-                    </Button>
-                  </div>
-                ))}
+        <h2>Trending</h2>
+        {loading ? (
+          <p>Loading...</p>
+        ) : (
+          <div className="featured-streams">
+            {uploadedVideos.map((video) => (
+              <div className="stream-card-trending" key={video.id}>
+                <h3>{video.title}</h3>
+                <p>{video.description}</p>
+                <iframe
+                  title={video.title}
+                  src={video.videoUrl}
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
+                <Button
+                  variant="contained"
+                  onClick={() => openShareDialog(video)}
+                >
+                  Share
+                </Button>
               </div>
-            )}
-          </section>
+            ))}
+          </div>
+        )}
+      </section>
+        
         </main>
       </div>
       <ShareDialog
@@ -208,3 +255,16 @@ const HomePage = () => {
 };
 
 export default HomePage;
+
+
+
+
+
+
+
+
+
+
+
+
+
