@@ -2,10 +2,10 @@
 import React, { useEffect, useState } from "react";
 import AuthService from "../../utils/auth";
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle } from "@mui/material";
-import PrimarySearchAppBar from '../MuiSearch/MuiSearch';
+import MuiSearch from '../MuiSearch/MuiSearch';
 import { PersistentSlideRight } from "../PersistentSlideRight/PersistentSlideRight";
 import "./Profile.css";
-import Footer from '../Footer/Footer'
+import Footer from '../Footer/Footer';
 
 const ShareDialog = ({ open, handleClose, video }) => {
   if (!video) return null;
@@ -67,17 +67,17 @@ const Profile = () => {
     if (!AuthService.loggedIn()) {
       window.location.assign("/");
     } else {
-      fetchVideos("trending");
+      fetchVideos();
     }
     checkAuthStatus();
   }, []);
 
-  const fetchVideos = (query) => {
+  const fetchVideos = () => {
     const apiKey = process.env.REACT_APP_API_KEY;
     const maxResults = 1;
 
     fetch(
-      `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=${maxResults}&q=${query}&key=${apiKey}`
+      `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=${maxResults}&q=${searchQuery}&key=${apiKey}`
     )
       .then((response) => response.json())
       .then((data) => {
@@ -96,17 +96,16 @@ const Profile = () => {
       });
   };
 
+  const handleSearch = () => {
+    fetchVideos();
+  };
+
+  const handleSearchQueryChange = (value) => {
+    setSearchQuery(value);
+  };
+
   const checkAuthStatus = () => {
     setLoggedIn(AuthService.loggedIn());
-  };
-
-  const handleSearch = (event) => {
-    event.preventDefault();
-    fetchVideos(searchQuery);
-  };
-
-  const handleSearchQueryChange = (event) => {
-    setSearchQuery(event.target.value);
   };
 
   const openShareDialog = (video) => {
@@ -122,50 +121,53 @@ const Profile = () => {
     setShareDialogOpen(false);
   };
 
-
-return (
-  <div>
-    <PersistentSlideRight />  
+  return (
     <div>
-      <PrimarySearchAppBar />
+      <PersistentSlideRight />  
+      <div>
+        <MuiSearch 
+          searchQuery={searchQuery} 
+          onSearchQueryChange={handleSearchQueryChange} 
+          onSearchSubmit={handleSearch} 
+        />
       </div>
-    <main className="main-content">
-      <section className="section">
-        <h2>Trending</h2>
-        {loading ? (
-          <p>Loading...</p>
-        ) : (
-          <div className="featured-streams">
-            {uploadedVideos.map((video) => (
-              <div className="stream-card-trending" key={video.id}>
-                <h3>{video.title}</h3>
-                <p>{video.description}</p>
-                <iframe
-                  title={video.title}
-                  src={video.videoUrl}
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                />
-                <Button
-                  variant="contained"
-                  onClick={() => openShareDialog(video)}
-                >
-                  Share
-                </Button>
-              </div>
-            ))}
-          </div>
-        )}
-      </section>
-    </main>
-    <ShareDialog
-      open={shareDialogOpen}
-      handleClose={closeShareDialog}
-      video={selectedVideo}
-    />
-    <Footer />
-  </div>
+      <main className="main-content">
+        <section className="section">
+          <h2>Trending</h2>
+          {loading ? (
+            <p>Loading...</p>
+          ) : (
+            <div className="featured-streams">
+              {uploadedVideos.map((video) => (
+                <div className="stream-card-trending" key={video.id}>
+                  <h3>{video.title}</h3>
+                  <p>{video.description}</p>
+                  <iframe
+                    title={video.title}
+                    src={video.videoUrl}
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  />
+                  <Button
+                    variant="contained"
+                    onClick={() => openShareDialog(video)}
+                  >
+                    Share
+                  </Button>
+                </div>
+              ))}
+            </div>
+          )}
+        </section>
+      </main>
+      <ShareDialog
+        open={shareDialogOpen}
+        handleClose={closeShareDialog}
+        video={selectedVideo}
+      />
+      <Footer />
+    </div>
   );
 };
 

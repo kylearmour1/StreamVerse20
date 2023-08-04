@@ -101,10 +101,10 @@ const HomePage = () => {
       });
   };
 
-  const handleSearch = (event) => {
-    event.preventDefault();
+  const handleSearch = () => {
     fetchVideos();
-  };
+};
+
 
   const handleSearchQueryChange = (value) => {
     setSearchQuery(value);
@@ -156,16 +156,15 @@ const HomePage = () => {
       </Header>
       
       <div>
-  {/* <MuiSearch 
-    searchQuery={searchQuery} 
-    onSearchQueryChange={handleSearchQueryChange} 
-    onSearchSubmit={handleSearch} 
-  /> */}
-  <MuiSearch 
+  
+<MuiSearch 
   searchQuery={searchQuery} 
   onSearchQueryChange={handleSearchQueryChange} 
   onSearchSubmit={handleSearch} 
 />
+
+
+
 
 </div>
 
